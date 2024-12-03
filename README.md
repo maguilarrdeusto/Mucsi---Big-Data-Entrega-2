@@ -31,6 +31,7 @@ De esta manera, se combina la recuperación de información relevante desde una 
 datos vectorial con la generación de respuestas naturales mediante un modelo de
 lenguaje (LLM), para proporcionar respuestas precisas y contextualizadas, mejorando la
 experiencia del usuario en la resolución de dudas comunes.
+
 ---
 ## Generación del dataset
 Para la generación del dataset se limitó la generación de datos a la tecnologías de
