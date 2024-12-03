@@ -340,3 +340,28 @@ def query_prompt(query, relevant_passage):
     return prompt
 ```
 
+``` Python
+def generate_response(query, db, model):
+    """
+    Genera una respuesta personalizada utilizando el LLM y un documento relevante de ChromaDB.
+
+    Args:
+        query (str): Consulta realizada por el usuario.
+        db: Objeto de la colección ChromaDB.
+        model: Objeto del modelo generativo (e.g., Gemini o GPT).
+
+    Returns:
+        str: Respuesta generada por el LLM.
+    """
+    # Recuperar el pasaje relevante desde ChromaDB
+    relevant_passage = db.query(query_texts=[query], n_results=1)['documents'][0][0]
+
+    # Crear el prompt contextualizado
+    prompt = query_prompt(query, relevant_passage)
+
+    # Generar la respuesta utilizando el modelo generativo
+    response = model.generate_content(prompt)
+
+    return response.text
+```
+
