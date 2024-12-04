@@ -180,7 +180,7 @@ un objeto de referencia al origen de los datos ficticios generados, para constat
 representación haya sido realizada.
 
 ```Python
-def get_embedding(text, model="text-embedding-ada-002"):
+def get_embedding(text):
     """
     Genera un embedding vectorial para un texto utilizando un modelo de embeddings.
 
@@ -195,22 +195,10 @@ def get_embedding(text, model="text-embedding-ada-002"):
 
     text = text.replace("\n", " ")
 
-    response = client.embeddings.create(input=[text], model=model)
+    response = client.embeddings.create(input=[text], model= "text-embedding-ada-002")
 
     return response.data[0].embedding
 
-embedding_model = "text-embedding-ada-002"
-
-# Ensure 'documents' is a DataFrame or Series before applying the function
-documents = data["Pregunta_respuesta"]  # This assumes 'data' is your DataFrame
-documents = documents.to_frame()  # If 'documents' is a Series, convert it to a DataFrame
-documents["embedding"] = documents['Pregunta_respuesta'].apply(lambda x: get_embedding(x, model=embedding_model))
-
-# Ensure there are embeddings to concatenate
-if len(documents.embedding.values) > 0:
-    matrix = np.vstack(documents.embedding.values)
-else:
-    matrix = np.array([])
 ```
 ---
 # Almacenamiento y similitud en Chroma
